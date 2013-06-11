@@ -52,6 +52,7 @@
                 android:id="@+id/add_weblink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:padding="10dp"
                 android:text="Course Weblink"
                 android:textSize="20dp" />
@@ -63,6 +64,15 @@
                 android:padding="10dp"
                 android:text="Office hour and office no."
                 android:textSize="20dp" />
+
+              <TextView
+                  android:id="@+id/add_email_id"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:clickable="true"
+                  android:padding="10dp"
+                  android:text="Prof&apos;s Email ID"
+                  android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"

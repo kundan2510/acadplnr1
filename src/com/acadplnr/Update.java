@@ -13,9 +13,9 @@ import android.widget.TextView;
 public class Update extends Activity implements OnClickListener {
 
 	Button bdone, blec, btut, blab;
-	EditText c_name, ins_name, wlink, off;
+	EditText c_name, ins_name, wlink, off,profemail;
 	String ClickedPosition, lecd, lecst, lecet, lecv, tutd, tutst, tutet, tutv,
-			labd, labst, labet, labv,hdata,welink;
+			labd, labst, labet, labv,hdata,welink,email;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class Update extends Activity implements OnClickListener {
 		ins_name = (EditText) findViewById(R.id.instructorname);
 		wlink = (EditText) findViewById(R.id.courselink);
 		off = (EditText) findViewById(R.id.officehour_and_address);
+		profemail = (EditText) findViewById(R.id.email_id);
 
 		bdone.setOnClickListener(this);
 		blec.setOnClickListener(this);
@@ -128,6 +129,11 @@ public class Update extends Activity implements OnClickListener {
 				tutv = "NotYetSet";
 			else
 				tutv = data[15];
+			
+			if (data[17].contentEquals("null"))
+				wlink.setText("NotYetSet");
+			else
+				wlink.setText(data[17]);
 
 		} 
 		info.close();
@@ -164,14 +170,15 @@ public class Update extends Activity implements OnClickListener {
 			try {
 				String cname = c_name.getText().toString();
 				String insname = ins_name.getText().toString();
-				 welink = wlink.getText().toString();
+				welink = wlink.getText().toString();
+				email = profemail.getText().toString();
 				String office = off.getText().toString();
 				Crs_database_help entry = new Crs_database_help(Update.this);
 				entry.open();
 				long l = Long.parseLong(ClickedPosition);
 				entry.UpdateCourse(l, cname, insname, welink, office, lecd,
 						lecst, lecet, tutd, tutst, tutet, labd, labst, labet,
-						lecv, labv, tutv,hdata);
+						lecv, labv, tutv,hdata,email);
 				entry.close();
 			} catch (Exception e) {
 				didItWORK = false;

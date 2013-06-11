@@ -28,6 +28,7 @@ public class Crs_database_help {
 	public static final String KEY_TUT_VENUE = "Tut_Venue";
 	public static final String KEY_OFFICE_HR_ADD = "Office_hr_addr";
 	public static final String KEY_WEB_DETAIL = "htmldata";
+	public static final String KEY_EMAIL = "email";
 	
 
 	private static final String DATABASE_TABLE = "Courses";
@@ -68,7 +69,8 @@ public class Crs_database_help {
 					+ KEY_LEC_VENUE + " TEXT, "
 					+ KEY_LAB_VENUE + " TEXT, "
 					+ KEY_TUT_VENUE + " TEXT, "
-					+ KEY_WEB_DETAIL + " TEXT);");
+					+ KEY_WEB_DETAIL + " TEXT, "
+					+ KEY_EMAIL + " TEXT );");
 			
 
 		}
@@ -98,7 +100,7 @@ public class Crs_database_help {
 // creates an entry in database
 	public long createEntry ( String cname, String insname, String welink, String offhradd,String lect_d,String lect_St,
 			String lect_Et,String tut_d,String tut_St,String tut_Et,String lab_d,String lab_St,
-			String lab_Et,String lec_v,String lab_v,String tut_v,String hdata	)throws Exception {
+			String lab_Et,String lec_v,String lab_v,String tut_v,String hdata, String emailid	)throws Exception {
 		// TODO Auto-generated method stub
 		ContentValues cv = new ContentValues();
 		cv.put(KEY_COURSE_NAME , cname);
@@ -118,6 +120,7 @@ public class Crs_database_help {
 		cv.put(KEY_LAB_VENUE , lab_v);
 		cv.put(KEY_TUT_VENUE , tut_v);
 		cv.put(KEY_WEB_DETAIL , hdata);
+		cv.put(KEY_EMAIL , emailid);
 		
 		return course_database.insertOrThrow(DATABASE_TABLE, null, cv);
 	}
@@ -129,7 +132,7 @@ public class Crs_database_help {
 		String[] columns ={KEY_ROW_ID,KEY_COURSE_NAME,KEY_WEBLINK,KEY_INSTRUCTOR,KEY_OFFICE_HR_ADD,
 				KEY_LECT_DAY,KEY_LECT_STIME,KEY_LECT_ETIME,KEY_LAB_DAY,KEY_LAB_STIME,
 				KEY_LAB_ETIME,KEY_TUT_DAY,KEY_TUT_STIME,KEY_TUT_ETIME,
-				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL}; 
+				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL, KEY_EMAIL}; 
 		Cursor c = course_database.query(DATABASE_TABLE, columns, null, null, null, null, null);
 		
 		
@@ -152,7 +155,7 @@ public class Crs_database_help {
 		String[] columns ={KEY_ROW_ID,KEY_COURSE_NAME,KEY_WEBLINK,KEY_INSTRUCTOR,KEY_OFFICE_HR_ADD,
 				KEY_LECT_DAY,KEY_LECT_STIME,KEY_LECT_ETIME,KEY_LAB_DAY,KEY_LAB_STIME,
 				KEY_LAB_ETIME,KEY_TUT_DAY,KEY_TUT_STIME,KEY_TUT_ETIME,
-				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL}; 
+				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL,KEY_EMAIL}; 
 		Cursor c = course_database.query(DATABASE_TABLE, columns, KEY_ROW_ID + "=" + l, null, null, null, null);
 		if(c!=null && c.moveToFirst())
 		{
@@ -171,7 +174,7 @@ public class Crs_database_help {
 		String[] columns ={KEY_ROW_ID,KEY_COURSE_NAME,KEY_WEBLINK,KEY_INSTRUCTOR,KEY_OFFICE_HR_ADD,
 				KEY_LECT_DAY,KEY_LECT_STIME,KEY_LECT_ETIME,KEY_LAB_DAY,KEY_LAB_STIME,
 				KEY_LAB_ETIME,KEY_TUT_DAY,KEY_TUT_STIME,KEY_TUT_ETIME,
-				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL}; 
+				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL,KEY_EMAIL}; 
 		Cursor c = course_database.query(DATABASE_TABLE, columns, KEY_ROW_ID + "=" + l, null, null, null, null);
 		if(c!=null)
 		{
@@ -185,7 +188,7 @@ public class Crs_database_help {
 		String[] columns ={KEY_ROW_ID,KEY_COURSE_NAME,KEY_WEBLINK,KEY_INSTRUCTOR,KEY_OFFICE_HR_ADD,
 				KEY_LECT_DAY,KEY_LECT_STIME,KEY_LECT_ETIME,KEY_LAB_DAY,KEY_LAB_STIME,
 				KEY_LAB_ETIME,KEY_TUT_DAY,KEY_TUT_STIME,KEY_TUT_ETIME,
-				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL}; 
+				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL,KEY_EMAIL}; 
 		Cursor c = course_database.query(DATABASE_TABLE, columns, null, null, null, null, null);
 		
 		int iName = c.getColumnIndex(KEY_COURSE_NAME);
@@ -207,7 +210,7 @@ public class Crs_database_help {
 	public void UpdateCourse(long l, String cname, String insname, String welink, String offhradd,String lect_d,
 			String lect_St,
 			String lect_Et,String tut_d,String tut_St,String tut_Et,String lab_d,String lab_St,
-			String lab_Et,String lec_v,String lab_v,String tut_v,String hdata	) {
+			String lab_Et,String lec_v,String lab_v,String tut_v,String hdata,String emailid 	) {
 		// TODO Auto-generated method stub
 		ContentValues cv = new ContentValues();
 		cv.put(KEY_COURSE_NAME , cname);
@@ -227,6 +230,7 @@ public class Crs_database_help {
 		cv.put(KEY_LAB_VENUE , lab_v);
 		cv.put(KEY_TUT_VENUE , tut_v);
 		cv.put(KEY_WEB_DETAIL , hdata);
+		cv.put(KEY_EMAIL , emailid);
 		
 		course_database.update(DATABASE_TABLE, cv,KEY_ROW_ID +"="+ l, null);
 		return;
@@ -237,7 +241,7 @@ public class Crs_database_help {
 		String[] columns ={KEY_ROW_ID,KEY_COURSE_NAME,KEY_WEBLINK,KEY_INSTRUCTOR,KEY_OFFICE_HR_ADD,
 				KEY_LECT_DAY,KEY_LECT_STIME,KEY_LECT_ETIME,KEY_LAB_DAY,KEY_LAB_STIME,
 				KEY_LAB_ETIME,KEY_TUT_DAY,KEY_TUT_STIME,KEY_TUT_ETIME,
-				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL}; 
+				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL,KEY_EMAIL}; 
 		
 		Cursor c = course_database.query(DATABASE_TABLE, columns,null, null, null, null, null);
 		int m=1;
@@ -267,7 +271,7 @@ public class Crs_database_help {
 		String[] columns ={KEY_ROW_ID,KEY_COURSE_NAME,KEY_WEBLINK,KEY_INSTRUCTOR,KEY_OFFICE_HR_ADD,
 				KEY_LECT_DAY,KEY_LECT_STIME,KEY_LECT_ETIME,KEY_LAB_DAY,KEY_LAB_STIME,
 				KEY_LAB_ETIME,KEY_TUT_DAY,KEY_TUT_STIME,KEY_TUT_ETIME,
-				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL}; 
+				KEY_LEC_VENUE,KEY_LAB_VENUE,KEY_TUT_VENUE,KEY_WEB_DETAIL,KEY_EMAIL}; 
 		Cursor c = course_database.query(DATABASE_TABLE, columns, null, null, null, null, null);
 		int i = c.getCount();
 		

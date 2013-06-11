@@ -14,7 +14,7 @@ public class CourseDisplay extends Activity implements OnClickListener {
 
 	Button beditcourse;
 	TextView courseNm, courseLnk, instuctname,lec_st,lec_et,tut_st,tut_et,lab_st,lab_et,
-			lec_v,tut_v,lab_v,lec_d,lab_d,tut_d,off_hr_add;
+			lec_v,tut_v,lab_v,lec_d,lab_d,tut_d,off_hr_add,email_id;
 	public String ClickedPosition,CourseLink;
 	
 	@Override
@@ -28,7 +28,7 @@ public class CourseDisplay extends Activity implements OnClickListener {
 		courseNm = (TextView) findViewById(R.id.coursename);
 		courseLnk = (TextView) findViewById(R.id.add_weblink);
 		instuctname = (TextView) findViewById(R.id.add_instructor_name);
-		
+		email_id = (TextView) findViewById(R.id.add_email_id);
 		lec_st = (TextView) findViewById(R.id.add_lecture_starttime);
 		tut_st = (TextView) findViewById(R.id.add_tutorial_starttime);
 		lab_st = (TextView) findViewById(R.id.add_lab_starttime);
@@ -48,6 +48,7 @@ public class CourseDisplay extends Activity implements OnClickListener {
 		
 		courseLnk.setClickable(true);
 		courseLnk.setOnClickListener(this);
+		email_id.setOnClickListener(this);
 		
 		Bundle gotBasket = getIntent().getExtras();
 		ClickedPosition = gotBasket.getString("position");
@@ -141,7 +142,15 @@ public class CourseDisplay extends Activity implements OnClickListener {
 			Intent i = new Intent(Intent.ACTION_VIEW);
 			i.setData(Uri.parse(url));
 			startActivity(i);
-	        finish();
+	        break;
+	        
+		case R.id.add_email_id:
+			String email = email_id.getText().toString();
+			String emailadd[] = {email};
+			Intent emailintent = new Intent(android.content.Intent.ACTION_SEND);
+			emailintent.putExtra(android.content.Intent.EXTRA_EMAIL,emailadd);
+			startActivity(emailintent);
+			break;
 		}
 		
 	}
